@@ -1,0 +1,48 @@
+ThrivikramaRao Kavuri
+ thrivikr@buffalo.edu | 716-253-5373 | Thrivikramarao Kavuri | Vikram Kavuri | TR
+ Technical Skills– ETL/ELT Tools: SSIS, Azure Data Factory, Apache Airflow, AWS Glue, dbt– Programming & Libraries: Python, PySpark, SQL, PowerShell, R, Java, LaTeX; Pandas, NumPy, Scikit-learn– Databases & Cloud: Snowflake, PostgreSQL, AWS (S3, Redshift, EMR, Athena, Quicksight), Azure– BI Tools: Tableau, Power BI, AWS Quicksight, Qlik Sense, Apache Superset, SSRS
+ Experience
+ Data Analytics Engineer | The Arc Erie County New York — New York, US
+ Jan 2025– Present
+ • Constructed resilient ETL pipelines integrating NetSuite and AVID finance systems via OAuth2.0-secured REST
+ APIs, consolidating AR/AP, invoice, and PO data into SQL Server (OLTP) and Snowflake (OLAP) warehouses.
+ • Audited billing pipelines with T-SQL and Python validation rules to detect duplicate invoices, late POs, and
+ reconciliation errors, cutting financial discrepancies by 30% month-over-month and enforcing compliance.
+ • Devised interactive Tableau and SSRS finance KPI dashboards tracking AR aging, PO lifecycle, collections, and
+ forecasts, enabling executives to strengthen working capital management and minimize revenue leakage.
+ • Documented pipeline architecture, data mappings, and validation outcomes while monitoring performance and
+ error logs, implementing alerting and recovery workflows that reduced downtime by 40%, enhancing reliability.
+ Data Science Analyst | Accenture India Pvt Ltd — Bangalore, India
+ May 2021– Jan 2023
+ • Engineered distributed PySpark pipelines on AWS Glue, S3, and EMR, incorporating serverless AWS Lambda
+ functions for lightweight real-time transformations, delivering scalable ingestion of 2TB+ revenue data daily.
+ • Optimized Snowflake and AWS Redshift warehouses through clustering keys, partitioning, and stored
+ procedures, boosting query responsiveness by 25% and standardizing financial dataset.
+ • Delivered and maintained 37 executive dashboards across Power BI and AWS Quicksight with embedded
+ validation checks, serving leadership across sales, marketing, and operations departments to monitor campaign
+ performance, revenue growth, and operational KPIs in real time.
+ • Authored technical documentation, unit test cases, and CI/CD workflows in Azure DevOps and AWS Athena,
+ reducing deployment cycles by 50% and ensuring resilient analytics delivery across production environments.
+ Business Analyst | SRIT Pvt Ltd — Bangalore, India
+ Jan 2020– Apr 2021
+ • Translated complex healthcare requirements into detailed FRDs and BRDs with supporting process flows in MS
+ Visio, establishing clear project scope and reducing requirement ambiguity across development teams.
+ • Developed interactive dashboards in Power BI and Apache Superset, enabling real-time tracking of
+ patient-care metrics and improving operational decision-making across C-suite.
+ • Led Agile sprints and daily stand-ups for a 13-member cross-functional team, leveraging MS Project for budget
+ tracking, Visio for process mapping, and JIRA for comprehensive risk and deliverable management.
+ Education
+ Masters in Data Science, University at Buffalo, GPA: 3.7/4.0
+ Bachelor’s in Computer Science, Karunya University, GPA: 3.4/4.0
+ Projects
+ Jan 2023– May 2024
+ Jun 2016– Jul 2020
+ Healthcare FHIR Data to Patient Risk {Tools: Databricks Lakehouse, Apache Spark, Python, MLflow}
+ • Engineered a Databricks Lakehouse pipeline to transform FHIR data into patient-centric risk predictions with
+ SHAP explainability, improving model accuracy to 92% and reducing time-to-insight by 90%.
+ Real Time Stock Market Data Pipeline {Tools: PySpark, Databricks, AWS, Apache Airflow}
+ • Architected a real-time stock market data pipeline leveraging PySpark, Airflow, and Databricks, integrating AWS
+ Lambda serverless functions for anomaly alerts and micro-batch processing, cutting query latency by 30
+ Certifications
+ • Generative AI Professional (Oracle)
+ • Fabric Data Engineer Associate (Azure)

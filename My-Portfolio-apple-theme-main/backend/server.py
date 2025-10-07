@@ -6,70 +6,53 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field
-from typing import List
+from typing import Dict, Any, List
 import uuid
+import numpy as np
 from datetime import datetime
 
+from rag_service import RES_INDEXES, _embedder, score_against_resume, top_keywords
+from gen import reasons_reply
 
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-# Create the main app without a prefix
 app = FastAPI()
 
-# Create a router with the /api prefix
-api_router = APIRouter(prefix="/api")
-
-
-# Define Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-# Add your routes to the router instead of directly to app
-@api_router.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
-
-# Include the router in the main app
-app.include_router(api_router)
-
+origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS","*").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=origins if origins else ["*"],
     allow_credentials=True,
-    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+class MatchRequest(BaseModel):
+    job_description: str
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+class MatchResponse(BaseModel):
+    top_keywords: List[str]
+    results: Dict[str, Any]  # { resume_name: { score: float, reasons: str } }
+
+@app.post("/match", response_model=MatchResponse)
+def match(req: MatchRequest):
+    jd = req.job_description.strip()
+    if not jd:
+        return {"top_keywords": [], "results": {}}
+
+    # Embedding for the full JD
+    jd_embed = _embedder.encode([jd], convert_to_numpy=True, normalize_embeddings=True)[0]
+
+    keywords = top_keywords(jd, n=10)
+    results = {}
+
+    # For each fixed resume, compute score + gather top snippets for RAG
+    for idx in RES_INDEXES:
+        score, top_pairs = score_against_resume(jd_embed, idx, top_k=6)
+        # Prepare small context for generation (keep under token limits)
+        retrieved = [c for (c, s) in top_pairs][:6]
+        reasons = reasons_reply(jd, keywords, retrieved)
+        results[idx.name] = {
+            "score": round(score, 1),
+            "reasons": reasons
+        }
+
+    return {"top_keywords": keywords, "results": results}
