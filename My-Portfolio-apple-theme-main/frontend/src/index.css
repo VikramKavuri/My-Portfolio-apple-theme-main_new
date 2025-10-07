@@ -1,0 +1,93 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* FIXED: Root styles */
+:root {
+  --background: 249 250 251; /* Light gray instead of pure white */
+  --foreground: 17 24 39; /* Dark gray */
+  --card: 255 255 255;
+  --card-foreground: 17 24 39;
+  --popover: 255 255 255;
+  --popover-foreground: 17 24 39;
+  --primary: 59 130 246;
+  --primary-foreground: 248 250 252;
+  --secondary: 243 244 246;
+  --secondary-foreground: 17 24 39;
+  --muted: 243 244 246;
+  --muted-foreground: 107 114 128;
+  --accent: 243 244 246;
+  --accent-foreground: 17 24 39;
+  --destructive: 239 68 68;
+  --destructive-foreground: 248 250 252;
+  --border: 229 231 235;
+  --input: 229 231 235;
+  --ring: 59 130 246;
+  --radius: 0.5rem;
+}
+
+/* FIXED: Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* FIXED: Prevent horizontal scroll */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  line-height: 1.6;
+  /* FIXED: Prevent body overflow issues */
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  /* FIXED: Ensure root takes full height */
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* FIXED: Prevent any white screen overlays */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* FIXED: Smooth scrolling for all anchor links */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* FIXED: Ensure no white screen blocking */
+.fixed {
+  transform: translateZ(0);
+}
+
+/* FIXED: Mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* FIXED: Remove any potential white overlays */
+.bg-white\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.bg-white\/80 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
