@@ -16,10 +16,14 @@ from gen import reasons_reply
 
 app = FastAPI()
 
-origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS","*").split(",") if o.strip()]
+# Build the origins list once
+origins_env = os.getenv("ALLOWED_ORIGINS", "")
+origins = [o.strip() for o in origins_env.split(",") if o.strip()] \
+          or ["https://my-portfolio-apple-theme-mainnew.vercel.app"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins if origins else ["*"],
+    allow_origins=origins,       # only once
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -56,3 +60,7 @@ def match(req: MatchRequest):
         }
 
     return {"top_keywords": keywords, "results": results}
+
+@app.get("/healthz")
+def health():
+    return {"ok": True}
