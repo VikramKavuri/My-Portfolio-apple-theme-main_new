@@ -4,7 +4,7 @@ from typing import List
 from openai import OpenAI
 
 client = OpenAI(
-    api_key=os.getenv("Bearer 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"),
+    api_key=os.getenv("OPENROUTER_API_KEY"),
     base_url=os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1/chat/completions"),
     default_headers={
         "HTTP-Referer": os.getenv("APP_URL", "http://localhost:3000"),
