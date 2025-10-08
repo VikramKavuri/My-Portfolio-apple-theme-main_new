@@ -1,6 +1,6 @@
 
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/api/:path*", "destination": "https://my-portfolio-apple-theme-main-new.onrender.com/:path*" }
   ]
 }
