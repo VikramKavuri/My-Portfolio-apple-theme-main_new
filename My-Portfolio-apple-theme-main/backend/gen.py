@@ -1,4 +1,4 @@
-# backend/gen.py
+
 import os
 from typing import List
 from openai import OpenAI
