@@ -19,7 +19,6 @@ app = FastAPI()
 origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS","*").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://my-portfolio-apple-theme-main-new.vercel.app"],
     allow_origins=origins if origins else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
